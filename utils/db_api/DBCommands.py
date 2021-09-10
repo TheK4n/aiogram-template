@@ -1,7 +1,7 @@
 from aiogram import types
 
 from .database import db
-from .models import User, Group, Sender
+from .models import User
 
 
 class DBCommands:
@@ -48,38 +48,3 @@ class DBCommands:
     async def get_all_users(self) -> list[User]:
         return await User.query.gino.all()
 
-    async def add_new_group(self, user_id: int, group_name: str, group_id: str):
-        new_group = Group()
-        new_group.group_name = group_name
-        new_group.group_id = group_id
-        new_group.user_id = user_id
-        await new_group.create()
-        return new_group
-
-    async def set_group_sender(self, group_id, user_id, message, image, interval):
-
-        new_sender = Sender()
-        new_sender.message = message
-        new_sender.group_id = group_id
-        new_sender.image = image
-        new_sender.interval = interval
-        new_sender.user_id = user_id
-        await new_sender.create()
-        return new_sender
-
-    async def get_sender(self, id_global: int):
-        return await Sender.query.where(Sender.id == id_global).gino.first()
-
-    async def del_sender(self, id_global: int):
-        await (await Sender.query.where(Sender.id == id_global).gino.first()).delete()
-
-    async def get_senders_by_interval(self, interval: int):
-        return await Sender.query.where(Sender.interval == interval).gino.all()
-
-    async def get_user_groups(self):
-        user = types.User.get_current()
-        return await Group.query.where(Group.user_id == user.id).gino.all()
-
-    async def get_user_senders_by_group(self, group_id):
-        user = types.User.get_current()
-        return await Sender.query.where(Sender.user_id == user.id and Sender.group_id == group_id).gino.all()
