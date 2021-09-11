@@ -19,7 +19,7 @@ async def on_shutdown(dp):
     # Уведомляет об выключении
     await on_shutdown_notify(dp)
 
-    await dp.close()
+    dp.stop_polling()
 
     # закрывает бд
     db.close()
