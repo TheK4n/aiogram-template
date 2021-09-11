@@ -16,7 +16,7 @@ async def on_startup(dispatcher):
 
 
 async def on_shutdown(dispatcher):
-    print("Bot stoped")
+    print("Bot stopped")
     # Уведомляет об выключении
     await on_shutdown_notify(dispatcher)
 
