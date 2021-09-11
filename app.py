@@ -14,12 +14,12 @@ async def on_startup(dispatcher):
     await on_startup_notify(dispatcher)
 
 
-async def on_shutdown(dp):
+async def on_shutdown(dispatcher):
 
     # Уведомляет об выключении
-    await on_shutdown_notify(dp)
+    await on_shutdown_notify(dispatcher)
 
-    dp.stop_polling()
+    dispatcher.stop_polling()
 
     # закрывает бд
     db.close()
