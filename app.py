@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.9
+
 from aiogram import executor
 
 from loader import dp, db
