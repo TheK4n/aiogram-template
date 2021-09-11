@@ -7,6 +7,7 @@ from utils.set_bot_commands import set_default_commands
 
 
 async def on_startup(dispatcher):
+    print("Bot started")
     # Устанавливаем дефолтные команды
     await set_default_commands(dispatcher)
 
@@ -15,7 +16,7 @@ async def on_startup(dispatcher):
 
 
 async def on_shutdown(dispatcher):
-
+    print("Bot stoped")
     # Уведомляет об выключении
     await on_shutdown_notify(dispatcher)
 
